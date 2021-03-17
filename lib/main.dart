@@ -1,3 +1,4 @@
+import 'package:easynotes/screens/note_details.dart';
 import 'package:easynotes/screens/note_list.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.yellow[50],
       ),
-      home: NoteList(),
+      home: NoteDetails(),
     );
   }
 }
