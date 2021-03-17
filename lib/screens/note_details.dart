@@ -68,6 +68,32 @@ class _NoteDetailsState extends State<NoteDetails> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('saved!');
+                      },
+                      child: Text('Save'),
+                    ),
+                  ),
+                  Container(
+                    width: 5.0,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print('Delete!');
+                      },
+                      child: Text('Delete'),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
