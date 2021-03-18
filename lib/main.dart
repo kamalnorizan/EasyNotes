@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.yellow[50],
       ),
-      home: NoteDetails(),
+      home: NoteList(),
     );
   }
 }

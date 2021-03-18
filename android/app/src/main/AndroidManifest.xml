@@ -2,7 +2,8 @@
     package="com.example.easynotes">
    <application
         android:label="easynotes"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesClearTextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

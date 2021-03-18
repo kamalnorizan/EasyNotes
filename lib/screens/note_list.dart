@@ -14,6 +14,10 @@ class _NoteListState extends State<NoteList> {
 
   @override
   Widget build(BuildContext context) {
+    if (notelist == null) {
+      updateListView();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Notes'),
