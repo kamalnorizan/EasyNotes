@@ -12,6 +12,25 @@ class Mysqlhelper {
   String colDate = 'date';
   String colPriority = 'priority';
 
+  Future<List<Note>> getNoteList() async {
+    final response = await http.post("$url", body: {
+      "process": "read",
+    });
+    List<Note> notes;
+
+    if (response.body != "0") {
+      final items = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      notes = items.map<Note>((item) {
+        return Note.fromMapObject(item);
+      }).toList();
+
+      print(notes);
+    }
+
+    return notes;
+  }
+
   Future insertNote(Note note) async {
     var response = await http.post("$url", body: {
       "process": "create",
