@@ -37,4 +37,15 @@ class Note {
       this._prority = newprority;
     }
   }
+
+  Map<String, dynamic> toMap() {
+    var map = Map<String, dynamic>();
+    map['id'] = _id;
+    map['title'] = _title;
+    map['description'] = _description;
+    map['date'] = _date;
+    map['prority'] = _prority;
+
+    return map;
+  }
 }
