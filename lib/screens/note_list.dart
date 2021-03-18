@@ -36,7 +36,7 @@ class _NoteListState extends State<NoteList> {
 
   ListView getNoteListView() {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: count,
       itemBuilder: (BuildContext context, int position) {
         return Card(
           color: Colors.white,
@@ -63,6 +63,7 @@ class _NoteListState extends State<NoteList> {
     noteListFuture.then(
       (notelist) => setState(() {
         this.notelist = notelist;
+        this.count = notelist.length;
       }),
     );
   }
