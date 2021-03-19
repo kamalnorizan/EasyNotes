@@ -58,6 +58,7 @@ class _NoteListState extends State<NoteList> {
                 int result =
                     await mysqlhelper.deleteNote(this.notelist[position].id);
                 updateListView();
+                _showSnackbar(context, 'Note Deleted Successfully');
               },
             ),
             onTap: () {
@@ -88,5 +89,12 @@ class _NoteListState extends State<NoteList> {
     if (result == true) {
       updateListView();
     }
+  }
+
+  void _showSnackbar(BuildContext context, String message) {
+    final snackbar = SnackBar(
+      content: Text(message),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }

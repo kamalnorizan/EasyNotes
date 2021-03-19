@@ -167,10 +167,24 @@ class _NoteDetailsState extends State<NoteDetails> {
       result = await mysqlhelper.insertNote(note);
     }
     moveToLastScreen();
+    if (result != 0) {
+      _showAlertDialog('Status', 'Note Saved Successfully');
+    } else {
+      _showAlertDialog('Status', 'Problem Saving Note');
+    }
   }
 
   void _delete() async {
     int result = await mysqlhelper.deleteNote(note.id);
     moveToLastScreen();
+    _showAlertDialog('Status', 'Note Deleted!');
+  }
+
+  void _showAlertDialog(String title, String message) {
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+    );
+    showDialog(context: context, builder: (_) => alertDialog);
   }
 }
