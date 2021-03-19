@@ -47,4 +47,36 @@ class Mysqlhelper {
       return 0;
     }
   }
+
+  Future updateNote(Note note) async {
+    var response = await http.post("$url", body: {
+      "process": "update",
+      "id": note.id.toString(),
+      "title": note.title,
+      "description": note.description,
+      "date": note.date,
+      "priority": note.priority.toString(),
+    });
+
+    String status = jsonDecode(response.body);
+    if (status == 'Success') {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  Future deleteNote(int id) async {
+    var response = await http.post("$url", body: {
+      "process": "delete",
+      "id": id.toString(),
+    });
+
+    String status = jsonDecode(response.body);
+    if (status == 'Success') {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }

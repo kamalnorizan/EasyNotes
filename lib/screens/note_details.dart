@@ -104,7 +104,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        print('Delete!');
+                        _delete();
                       },
                       child: Text('Delete'),
                     ),
@@ -161,8 +161,16 @@ class _NoteDetailsState extends State<NoteDetails> {
     note.date = DateFormat('y-M-d').format(DateTime.now());
 
     int result;
+    if (note.id != null) {
+      result = await mysqlhelper.updateNote(note);
+    } else {
+      result = await mysqlhelper.insertNote(note);
+    }
+    moveToLastScreen();
+  }
 
-    result = await mysqlhelper.insertNote(note);
+  void _delete() async {
+    int result = await mysqlhelper.deleteNote(note.id);
     moveToLastScreen();
   }
 }

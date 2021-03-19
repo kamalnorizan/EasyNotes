@@ -52,7 +52,14 @@ class _NoteListState extends State<NoteList> {
               backgroundColor: Colors.red,
               child: Icon(Icons.keyboard_arrow_right),
             ),
-            trailing: Icon(Icons.delete, color: Colors.grey),
+            trailing: GestureDetector(
+              child: Icon(Icons.delete, color: Colors.grey),
+              onTap: () async {
+                int result =
+                    await mysqlhelper.deleteNote(this.notelist[position].id);
+                updateListView();
+              },
+            ),
             onTap: () {
               navigateToDetail(this.notelist[position], 'Edit Note');
             },
