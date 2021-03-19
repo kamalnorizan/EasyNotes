@@ -60,7 +60,7 @@ class _NoteDetailsState extends State<NoteDetails> {
               child: TextField(
                 controller: titleController,
                 onChanged: (value) {
-                  print(value);
+                  updateTitle();
                 },
                 decoration: InputDecoration(
                   labelText: 'Title',
@@ -75,7 +75,7 @@ class _NoteDetailsState extends State<NoteDetails> {
               child: TextField(
                 controller: descriptionController,
                 onChanged: (value) {
-                  print(value);
+                  updateDescription();
                 },
                 decoration: InputDecoration(
                   labelText: 'Description',
@@ -118,6 +118,14 @@ class _NoteDetailsState extends State<NoteDetails> {
     );
   }
 
+  void updateTitle() {
+    note.title = titleController.text;
+  }
+
+  void updateDescription() {
+    note.description = descriptionController.text;
+  }
+
   void updatePriorityAsInt(String value) {
     switch (value) {
       case 'High':
@@ -145,7 +153,13 @@ class _NoteDetailsState extends State<NoteDetails> {
     return priority;
   }
 
+  void moveToLastScreen() {
+    Navigator.pop(context, true);
+  }
+
   void _save() async {
+    moveToLastScreen();
+
     note.date = DateFormat('y-M-d').format(DateTime.now());
 
     int result;
