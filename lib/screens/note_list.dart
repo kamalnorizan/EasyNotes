@@ -1,4 +1,5 @@
 import 'package:easynotes/models/note.dart';
+import 'package:easynotes/screens/note_details.dart';
 import 'package:easynotes/utils/mysql_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _NoteListState extends State<NoteList> {
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('Button Clicked!');
+          navigateToDetail(Note('', '', 2), 'Create Note');
         },
         backgroundColor: Colors.deepOrange,
         tooltip: 'Add Note',
@@ -52,6 +53,9 @@ class _NoteListState extends State<NoteList> {
               child: Icon(Icons.keyboard_arrow_right),
             ),
             trailing: Icon(Icons.delete, color: Colors.grey),
+            onTap: () {
+              navigateToDetail(this.notelist[position], 'Edit Note');
+            },
           ),
         );
       },
@@ -66,5 +70,16 @@ class _NoteListState extends State<NoteList> {
         this.count = notelist.length;
       }),
     );
+  }
+
+  void navigateToDetail(Note note, String title) async {
+    bool result =
+        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return NoteDetails(note, title);
+    }));
+
+    if (result == true) {
+      updateListView();
+    }
   }
 }

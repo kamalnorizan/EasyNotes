@@ -1,19 +1,32 @@
+import 'package:easynotes/models/note.dart';
 import 'package:flutter/material.dart';
 
 class NoteDetails extends StatefulWidget {
+  final String title;
+  final Note note;
+
+  NoteDetails(this.note, this.title);
+
   @override
-  _NoteDetailsState createState() => _NoteDetailsState();
+  _NoteDetailsState createState() => _NoteDetailsState(this.note, this.title);
 }
 
 class _NoteDetailsState extends State<NoteDetails> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  static var _priorities = ['High', 'Low'];
+  final String title;
+  final Note note;
+
+  _NoteDetailsState(this.note, this.title);
 
   @override
   Widget build(BuildContext context) {
+    titleController.text = note.title;
+    descriptionController.text = note.description;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Note'),
+        title: Text(title),
       ),
       body: Padding(
         padding: EdgeInsets.only(
@@ -98,5 +111,32 @@ class _NoteDetailsState extends State<NoteDetails> {
         ),
       ),
     );
+  }
+
+  void updatePriorityAsInt(String value) {
+    switch (value) {
+      case 'High':
+        note.priority = 1;
+        break;
+      case 'Low':
+        note.priority = 2;
+        break;
+      default:
+    }
+  }
+
+  String getPriorityAsString(int value) {
+    String priority;
+    switch (value) {
+      case 1:
+        priority = _priorities[0];
+        break;
+      case 2:
+        priority = _priorities[1];
+        break;
+      default:
+    }
+
+    return priority;
   }
 }
