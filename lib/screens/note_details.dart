@@ -177,7 +177,9 @@ class _NoteDetailsState extends State<NoteDetails> {
   void _delete() async {
     int result = await mysqlhelper.deleteNote(note.id);
     moveToLastScreen();
-    _showAlertDialog('Status', 'Note Deleted!');
+    if (result != 0) {
+      _showAlertDialog('Status', 'Note Deleted!');
+    }
   }
 
   void _showAlertDialog(String title, String message) {
