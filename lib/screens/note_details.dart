@@ -38,17 +38,18 @@ class _NoteDetailsState extends State<NoteDetails> {
           children: [
             ListTile(
               title: DropdownButton(
-                items: [
-                  DropdownMenuItem(
-                    child: Text('Low'),
-                    value: 'Low',
-                  ),
-                  DropdownMenuItem(
-                    value: 'High',
-                    child: Text('High'),
-                  ),
-                ],
-                value: 'Low',
+                items: _priorities.map((String drpdownStringItem) {
+                  return DropdownMenuItem<String>(
+                    child: Text(drpdownStringItem),
+                    value: drpdownStringItem,
+                  );
+                }).toList(),
+                value: getPriorityAsString(note.priority),
+                onChanged: (value) {
+                  setState(() {
+                    updatePriorityAsInt(value);
+                  });
+                },
               ),
             ),
             Padding(
