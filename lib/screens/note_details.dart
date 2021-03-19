@@ -1,5 +1,7 @@
 import 'package:easynotes/models/note.dart';
+import 'package:easynotes/utils/mysql_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NoteDetails extends StatefulWidget {
   final String title;
@@ -17,6 +19,7 @@ class _NoteDetailsState extends State<NoteDetails> {
   static var _priorities = ['High', 'Low'];
   final String title;
   final Note note;
+  Mysqlhelper mysqlhelper = Mysqlhelper();
 
   _NoteDetailsState(this.note, this.title);
 
@@ -90,6 +93,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                     child: ElevatedButton(
                       onPressed: () {
                         print('saved!');
+                        _save();
                       },
                       child: Text('Save'),
                     ),
@@ -139,5 +143,13 @@ class _NoteDetailsState extends State<NoteDetails> {
     }
 
     return priority;
+  }
+
+  void _save() async {
+    note.date = DateFormat('y-M-d').format(DateTime.now());
+
+    int result;
+
+    result = await mysqlhelper.insertNote(note);
   }
 }
