@@ -158,12 +158,11 @@ class _NoteDetailsState extends State<NoteDetails> {
   }
 
   void _save() async {
-    moveToLastScreen();
-
     note.date = DateFormat('y-M-d').format(DateTime.now());
 
     int result;
 
     result = await mysqlhelper.insertNote(note);
+    moveToLastScreen();
   }
 }
